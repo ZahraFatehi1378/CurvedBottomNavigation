@@ -12,8 +12,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
+import com.example.curvedbottomnavigation.items.item.CircularItem
 import com.example.curvedbottomnavigation.ui.theme.CurvedBottomNavigationTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,36 +24,54 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
-            var items = listOf(
-                BottomNavItem(
-                    icon = ImageVector.vectorResource(id = R.drawable.ic_profile_line),
-                    selectedIcon = ImageVector.vectorResource(id = R.drawable.ic_profile),
-                ),
-                BottomNavItem(
-                    icon = ImageVector.vectorResource(id = R.drawable.ic_heart_line),
-                    selectedIcon = ImageVector.vectorResource(id = R.drawable.ic_heart),
-                ),
-                BottomNavItem(
-                    icon = ImageVector.vectorResource(id = R.drawable.ic_home_line),
-                    selectedIcon = ImageVector.vectorResource(id = R.drawable.ic_home)
-                ),
-//                BottomNavItem(
-//                    icon = ImageVector.vectorResource(id = R.drawable.ic_home_line),
-//                    selectedIcon = ImageVector.vectorResource(id = R.drawable.ic_home)
+//            val items = listOf(
+//                LinearItem(
+//                    icon = ImageVector.vectorResource(id = R.drawable.ic_profile_line),
+//                    selectedIcon = ImageVector.vectorResource(id = R.drawable.ic_profile),
+//                    text = "profile"
 //                ),
+//                LinearItem(
+//                    icon = ImageVector.vectorResource(id = R.drawable.ic_home_line),
+//                    selectedIcon = ImageVector.vectorResource(id = R.drawable.ic_home),
+//                    text = "home"
+//                ),
+//                LinearItem(
+//                    icon = ImageVector.vectorResource(id = R.drawable.ic_heart_line),
+//                    selectedIcon = ImageVector.vectorResource(id = R.drawable.ic_heart),
+//                    text = "favorites"
+//                ),
+//
+//            )
+
+
+            val items = listOf(
+                CircularItem(
+                    icon = ImageVector.vectorResource(id = R.drawable.ic_profile),
+                    text = "profile"
+                ),
+                CircularItem(
+                    icon = ImageVector.vectorResource(id = R.drawable.ic_home),
+                    text = "home",),
+                CircularItem(
+                    icon = ImageVector.vectorResource(id = R.drawable.ic_heart),
+                    text = "favorites")
             )
 
 
             CurvedBottomNavigationTheme {
                 val routes = remember {
-                    mutableStateListOf("first", "second", "third" ,"forth")
+                    mutableStateListOf("first", "second", "third")
                 }
                 Scaffold(
                     bottomBar = {
-                        CurvedBottomNavigation2(
+                        CurvedBottomNavigation(
                             items = items,
-                            defaultItemIndex=2,
+                            defaultItemIndex = 1,
                             color = MaterialTheme.colors.primary,
+                            height = 100.dp,
+                            hills = 2,
+                            verticalControl = -30f,
+                            topPadding = 10.dp
                         ) { index ->
                             navController.navigate(routes[index]) {
                                 popUpTo(navController.graph.findStartDestination().id)

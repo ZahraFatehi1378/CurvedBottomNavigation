@@ -19,7 +19,7 @@ import androidx.navigation.compose.composable
 fun BottomNavGraph(navHostController: NavHostController) {
     NavHost(
         navController = navHostController,
-        startDestination = "third"
+        startDestination = "second"
     ) {
         composable(route = "first") {
             FirstScreen()
@@ -40,24 +40,24 @@ fun BottomNavGraph(navHostController: NavHostController) {
 @Composable
 fun FirstScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
-        Screen(txt = "first", txtColor = Color(0xFF22577E) , bgColor = Color(0xFFB1D0E0))
+        Screen(txt = "first", txtColor = Color(0xFF88b388) , bgColor = Color(0xFFFFFFFF))
     }
 }
 
 @Composable
 fun SecondScreen() {
-    Screen(txt = "second", txtColor = Color(0xFFAD8B73) , bgColor = Color(0xFFF2DDC1))
+    Screen(txt = "second", txtColor = Color(0xFFAD8B73) , bgColor = Color(0xFFFFFFFF))
 }
 
 @Composable
 fun ThirdScreen() {
-    Screen(txt = "third", txtColor = Color(0xFF7882A4) , bgColor = Color(0xFFEFEFEF))
+    Screen(txt = "third", txtColor = Color(0xFF8892b3) , bgColor = Color(0xFFFFFFFF))
 
 }
 
 @Composable
 fun ForthScreen() {
-    Screen(txt = "Forth", txtColor = Color(0xFF99A799) , bgColor = Color(0xFFD3E4CD))
+    Screen(txt = "Forth", txtColor = Color(0xFF99A799) , bgColor = Color(0xFFFFFFFF))
 }
 
 @Composable
