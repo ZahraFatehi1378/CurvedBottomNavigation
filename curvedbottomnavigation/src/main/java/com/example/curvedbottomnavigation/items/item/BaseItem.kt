@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
  * @property textFontFamily
  */
 
-abstract class BaseItem(
+sealed class BaseItem(
     open val iconColor: Color,
     open val selectedIconColor: Color?,
     open val icon: ImageVector?,

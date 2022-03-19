@@ -5,17 +5,38 @@ A compose library to easily make beautiful bottom navigation with a lot of custo
 ![CurvedBottomNavigation](/previews/first.gif)
 ![CurvedBottomNavigation](/previews/second.gif)
 ![CurvedBottomNavigation](/previews/third.gif)
+![CurvedBottomNavigation](/previews/forth.gif)
 
 ## Installation
 
 
 Gradle:
 ```
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
 
+dependencies {
+    implementation 'com.github.ZahraFatehi1378:CurvedBottomNavigation:-SNAPSHOT'
+}
 ```
 Maven:
 ```
+<repositories>
+	<repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
+</repositories>
 
+<dependency>
+    <groupId>com.github.ZahraFatehi1378</groupId>
+    <artifactId>CurvedBottomNavigation</artifactId>
+    <version>-SNAPSHOT</version>
+</dependency>
 ```
 
 # Basic usage

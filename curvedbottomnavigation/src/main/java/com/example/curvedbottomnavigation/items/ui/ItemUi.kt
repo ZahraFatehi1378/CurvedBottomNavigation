@@ -1,14 +1,16 @@
 package com.example.curvedbottomnavigation.items.ui
 
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -32,32 +34,42 @@ import kotlin.math.sin
  * @param item base item that sets the animations
  * @param onClick on item click callback
  */
-@SuppressLint("UnrememberedAnimatable", "CoroutineCreationDuringComposition")
+
 @Composable
 fun ItemUI(
     isActive: Boolean,
     item: BaseItem,
     onClick: () -> Unit
 ) {
-    val animatedAlpha = Animatable(0f)
+    val animatedAlpha = remember { Animatable(0f) }
     val vectorPainter = item.selectedIcon?.let { rememberVectorPainter(image = it) }
     val lineVectorPainter = item.icon?.let { rememberVectorPainter(image = it) }
-
-    rememberCoroutineScope().launch {
-        animatedAlpha.animateTo(
-            100f,
-            animationSpec = tween(
-                item.animDurationMillis
+    val scope = rememberCoroutineScope()
+    SideEffect {
+        scope.launch {
+            animatedAlpha.animateTo(
+                100f,
+                animationSpec = tween(
+                    item.animDurationMillis
+                )
             )
-        )
+
+        }
     }
 
     Canvas(modifier = Modifier
         .height(50.dp)
         .width(50.dp)
-        .clickable {
-            onClick()
-        }) {
+        .clickable(
+            indication = null,
+            interactionSource = MutableInteractionSource(),
+            onClick = {
+                scope.launch {
+                    animatedAlpha.snapTo(0f)
+                }
+                onClick()
+            }
+        )) {
 
 
         val centerX = size.width / 2

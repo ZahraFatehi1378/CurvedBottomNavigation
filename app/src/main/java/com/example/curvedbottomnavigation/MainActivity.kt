@@ -47,14 +47,18 @@ class MainActivity : ComponentActivity() {
             val items = listOf(
                 CircularItem(
                     icon = ImageVector.vectorResource(id = R.drawable.ic_profile),
+                    iconSize = 80f,
                     text = "profile"
                 ),
                 CircularItem(
                     icon = ImageVector.vectorResource(id = R.drawable.ic_home),
-                    text = "home",),
-                CircularItem(
-                    icon = ImageVector.vectorResource(id = R.drawable.ic_heart),
-                    text = "favorites")
+                    iconSize = 80f,
+                    text = "home",
+                ),
+//                CircularItem(
+//                    icon = ImageVector.vectorResource(id = R.drawable.ic_heart),
+//                    text = "favorites"
+//                )
             )
 
 
@@ -69,9 +73,10 @@ class MainActivity : ComponentActivity() {
                             defaultItemIndex = 1,
                             color = MaterialTheme.colors.primary,
                             height = 100.dp,
-                            hills = 2,
+                            hills = 3,
                             verticalControl = -30f,
-                            topPadding = 10.dp
+                            topPadding = 12.dp ,
+                            space = 0.dp
                         ) { index ->
                             navController.navigate(routes[index]) {
                                 popUpTo(navController.graph.findStartDestination().id)
